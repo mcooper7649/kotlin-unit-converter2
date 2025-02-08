@@ -21,6 +21,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -79,12 +81,25 @@ fun UnitConverter(modifier: Modifier = Modifier) {
                     Icon(Icons.Default.ArrowDropDown,
                         contentDescription = "Arrow")
                 }
+                DropdownMenu(expanded = true, onDismissRequest = {}){
+                    DropdownMenuItem(text= { Text("Centimeters") }, onClick = {})
+                    DropdownMenuItem(text= { Text("Feet") }, onClick = {})
+                    DropdownMenuItem(text= { Text("Meters") }, onClick = {})
+
+                }
             }
+            Spacer(modifier = Modifier.height(16.dp))
             Box {
                 Button(onClick = {}){
                     Text("Select")
                     Icon(Icons.Default.ArrowDropDown,
                         contentDescription = "Arrow")
+                }
+                DropdownMenu(expanded = true, onDismissRequest = {}){
+                    DropdownMenuItem(text= { Text("Centimeters") }, onClick = {})
+                    DropdownMenuItem(text= { Text("Feet") }, onClick = {})
+                    DropdownMenuItem(text= { Text("Meters") }, onClick = {})
+
                 }
             }
         }
