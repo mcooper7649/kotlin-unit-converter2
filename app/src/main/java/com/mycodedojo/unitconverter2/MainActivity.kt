@@ -88,6 +88,7 @@ fun UnitConverter(modifier: Modifier = Modifier) {
 
                 }
             }
+            Spacer(modifier = Modifier.height(16.dp))
             Box {
                 Button(onClick = {}){
                     Text("Select")
