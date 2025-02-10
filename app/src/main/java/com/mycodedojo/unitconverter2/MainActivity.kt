@@ -39,6 +39,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mycodedojo.unitconverter2.ui.theme.UnitConverter2Theme
+import kotlin.math.roundToInt
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -77,6 +78,12 @@ fun UnitConverter(modifier: Modifier = Modifier) {
     var oExpanded by remember { mutableStateOf(false) }
     val conversionFactor = remember { mutableStateOf(0.01) }
 
+    fun convertUnits() {
+        val inputValueDouble = inputValue.toDoubleOrNull() ?: 0.0
+        val result = (inputValueDouble * conversionFactor.value * 100.0).roundToInt() /100.0
+        outputValue = result.toString()
+    }
+
     Column(modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -107,6 +114,7 @@ fun UnitConverter(modifier: Modifier = Modifier) {
                         conversionFactor.value = 0.01
                         outputValue = (inputValue.toDouble() * conversionFactor.value).toString()
                         outputUnit = "Meters"
+                        convertUnits()
                     })
                     DropdownMenuItem(text= { Text("Feet") }, onClick = {
                         iExpanded = false
@@ -114,6 +122,7 @@ fun UnitConverter(modifier: Modifier = Modifier) {
                         conversionFactor.value = 0.3048
                         outputValue = (inputValue.toDouble() * conversionFactor.value).toString()
                         outputUnit = "Meters"
+                        convertUnits()
                     })
                     DropdownMenuItem(text= { Text("Meters") }, onClick = {
                         iExpanded = false
@@ -121,6 +130,7 @@ fun UnitConverter(modifier: Modifier = Modifier) {
                         conversionFactor.value = 1.0
                         outputValue = (inputValue.toDouble() * conversionFactor.value).toString()
                         outputUnit = "Meters"
+                        convertUnits()
                     })
 
                 }
