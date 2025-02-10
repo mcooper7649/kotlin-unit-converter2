@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -94,26 +95,45 @@ fun UnitConverter(modifier: Modifier = Modifier) {
 
         Row {
             Box {
-                Button(onClick = {}){
+                Button(onClick = { iExpanded = true}){
                     Text("Select")
                     Icon(Icons.Default.ArrowDropDown,
                         contentDescription = "Arrow")
                 }
-                DropdownMenu(expanded = false, onDismissRequest = {}){
-                    DropdownMenuItem(text= { Text("Centimeters") }, onClick = {})
-                    DropdownMenuItem(text= { Text("Feet") }, onClick = {})
-                    DropdownMenuItem(text= { Text("Meters") }, onClick = {})
+                DropdownMenu(expanded = iExpanded, onDismissRequest = { iExpanded = false}){
+                    DropdownMenuItem(text= { Text("Centimeters") }, onClick = {
+                        iExpanded = false
+                        inputUnit = "Centimeters"
+                        conversionFactor.value = 0.01
+                        outputValue = (inputValue.toDouble() * conversionFactor.value).toString()
+                        outputUnit = "Meters"
+                    })
+                    DropdownMenuItem(text= { Text("Feet") }, onClick = {
+                        iExpanded = false
+                        inputUnit = "Feet"
+                        conversionFactor.value = 0.3048
+                        outputValue = (inputValue.toDouble() * conversionFactor.value).toString()
+                        outputUnit = "Meters"
+                    })
+                    DropdownMenuItem(text= { Text("Meters") }, onClick = {
+                        iExpanded = false
+                        inputUnit = "Meters"
+                        conversionFactor.value = 1.0
+                        outputValue = (inputValue.toDouble() * conversionFactor.value).toString()
+                        outputUnit = "Meters"
+                    })
 
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.width(16.dp))
             Box {
-                Button(onClick = {}){
+                Button(onClick = { oExpanded = true}){
                     Text("Select")
                     Icon(Icons.Default.ArrowDropDown,
                         contentDescription = "Arrow")
                 }
-                DropdownMenu(expanded = false, onDismissRequest = {}){
+                DropdownMenu(expanded = oExpanded, onDismissRequest = { oExpanded = false}){
                     DropdownMenuItem(text= { Text("Centimeters") }, onClick = {})
                     DropdownMenuItem(text= { Text("Feet") }, onClick = {})
                     DropdownMenuItem(text= { Text("Meters") }, onClick = {})
