@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
                         TopAppBar(
-                            title = { Text("Unit Converter") },
+                            title = { Text("Unit Converter")},
                             colors = TopAppBarDefaults.smallTopAppBarColors(
                                 containerColor = MaterialTheme.colorScheme.primary
                             )
@@ -91,7 +91,7 @@ fun UnitConverter(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Unit Converter", modifier = Modifier.padding(10.dp))
+        Text("Unit Converter", style = MaterialTheme.typography.headlineMedium)
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
             value = inputValue,
@@ -177,7 +177,9 @@ fun UnitConverter(modifier: Modifier = Modifier) {
         }
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text("Result: ${outputValue} ${outputUnit} ")
+        Text("Result: $outputValue $outputUnit",
+            style = MaterialTheme.typography.headlineMedium
+            )
     }
 }
 
