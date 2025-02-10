@@ -28,6 +28,10 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -63,15 +67,29 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun UnitConverter(modifier: Modifier = Modifier) {
+
+    var inputValue by remember { mutableStateOf("") }
+    var outputValue by remember { mutableStateOf("") }
+    var inputUnit by remember { mutableStateOf("Centimeters") }
+    var outputUnit by remember { mutableStateOf("Meters") }
+    var iExpanded by remember { mutableStateOf(false) }
+    var oExpanded by remember { mutableStateOf(false) }
+    val conversionFactor = remember { mutableStateOf(0.01) }
+
     Column(modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Unit Converter", modifier = Modifier.padding(100.dp))
+        Text("Unit Converter", modifier = Modifier.padding(10.dp))
         Spacer(modifier = Modifier.height(16.dp))
-        OutlinedTextField("", onValueChange = {
-
-        })
+        OutlinedTextField(
+            value = inputValue,
+            onValueChange = {
+            inputValue = it
+        },
+            label = { Text("Input Value") },
+            modifier = Modifier.padding(10.dp)
+        )
         Spacer(modifier = Modifier.height(16.dp))
 
         Row {
@@ -81,7 +99,7 @@ fun UnitConverter(modifier: Modifier = Modifier) {
                     Icon(Icons.Default.ArrowDropDown,
                         contentDescription = "Arrow")
                 }
-                DropdownMenu(expanded = true, onDismissRequest = {}){
+                DropdownMenu(expanded = false, onDismissRequest = {}){
                     DropdownMenuItem(text= { Text("Centimeters") }, onClick = {})
                     DropdownMenuItem(text= { Text("Feet") }, onClick = {})
                     DropdownMenuItem(text= { Text("Meters") }, onClick = {})
@@ -95,7 +113,7 @@ fun UnitConverter(modifier: Modifier = Modifier) {
                     Icon(Icons.Default.ArrowDropDown,
                         contentDescription = "Arrow")
                 }
-                DropdownMenu(expanded = true, onDismissRequest = {}){
+                DropdownMenu(expanded = false, onDismissRequest = {}){
                     DropdownMenuItem(text= { Text("Centimeters") }, onClick = {})
                     DropdownMenuItem(text= { Text("Feet") }, onClick = {})
                     DropdownMenuItem(text= { Text("Meters") }, onClick = {})
